@@ -1,6 +1,5 @@
 <?php 
     require 'functions.php';
-
     $students = query();
 ?>
 
@@ -19,6 +18,7 @@
         <tr>
             <th>NO</th>
             <th>NAME</th>
+            <th>STUDENT ID</th>
             <th>EMAIL</th>
             <th>FACULTY</th>
             <th>OPTION</th>
@@ -28,11 +28,12 @@
             <tr>
                 <td><?= $i ?></td>
                 <td><?= $std -> name ?></td>
+                <td><?= student_id($std -> id)?></td>
                 <td><?= $std -> email ?></td>
                 <td><?= $std -> faculty ?></td>
                 <td>
                     <a href="update.php?id=<?= $std -> id ?>">Edit</a>
-                    <a href="delete.php?id=<?= $std -> id ?>">Delete</a>
+                    <a href="delete.php?idDelete=<?= $std -> id ?>">Delete</a>
                 </td>
                 <?php $i++?>
             </tr>
