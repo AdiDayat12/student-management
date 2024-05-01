@@ -44,18 +44,17 @@
 
         $success = $stm->execute();
 
-        // Ambil jumlah baris yang terpengaruh
+        // take affected rows
         $affectedRows = $conn->affected_rows;
     
-        // Tutup statement
+        // close statement
         $stm->close();
     
-        // Jika operasi berhasil, kembalikan jumlah baris yang terpengaruh
+        // if operation success return affected rows
         if ($success) {
             return $affectedRows;
         } else {
-            // Jika operasi gagal, Anda bisa mengembalikan nilai lain atau melemparkan pengecualian (exception)
-            return -1; // Nilai ini dapat diubah sesuai kebutuhan Anda
+            return -1; 
         }
     }
 
@@ -82,6 +81,46 @@
         }else {
             return -1;
         }
+    }
+
+    function select($id){
+        global $conn;
+        $result = mysqli_query($conn, "SELECT * FROM student WHERE id = $id" );
+        $data = mysqli_fetch_object($result);
+        return $data;
+    }
+
+    function update($datas){
+        global $conn;
+
+
+        $id = $datas['idUpdate'];
+        $name = htmlspecialchars($datas['nameUpdate']);
+        $email = htmlspecialchars($datas['emailUpdate']);
+        $faculty = htmlspecialchars($datas['facultyUpdate']);
+
+
+        $query = "UPDATE student SET name = ?, email = ?, faculty = ? WHERE id = ?";
+        $stm = $conn->prepare($query);
+
+        
+        $stm->bind_param("sssi", $name, $email, $faculty, $id);
+
+
+        $success = $stm->execute();
+
+
+        $affectedRows = $conn->affected_rows;
+
+
+        $stm->close();
+        
+        if ($success){
+            return $affectedRows;
+        } else{
+            return -1;
+        }
+
     }
 
     

@@ -30,7 +30,7 @@
     <link rel="stylesheet" href="insert-style.css">
 </head>
 <body>
-    <h1>Form Tambah Mahasiswa</h1>
+    <h1>Insert Student Form</h1>
     <form action="" method="post" enctype="multipart/form-data" class="form-container">
         <div class="form-group">
             <label for="name">Name:</label><br>

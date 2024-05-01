@@ -32,7 +32,7 @@
                 <td><?= $std -> email ?></td>
                 <td><?= $std -> faculty ?></td>
                 <td>
-                    <a href="update.php?id=<?= $std -> id ?>">Edit</a>
+                    <a href="update.php?idUpdate=<?= $std -> id ?>">Edit</a>
                     <a href="delete.php?idDelete=<?= $std -> id ?>">Delete</a>
                 </td>
                 <?php $i++?>
