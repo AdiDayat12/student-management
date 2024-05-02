@@ -1,6 +1,10 @@
 <?php 
     require 'functions.php';
-    $students = query();
+    $students = query("SELECT * FROM student");
+
+    if (isset($_POST['search'])){
+        $students = search($_POST['keyword']);
+    }
 ?>
 
 
@@ -14,6 +18,10 @@
 </head>
 <body>
     <h1>STUDENT TABLE</h1>
+    <form action="" method="post">
+        <input type="text" placeholder="enter data" name="keyword">
+        <button type="submit" name="search">search</button>
+    </form>
     <table border="1" cellpadding="10" cellspacing="0">
         <tr>
             <th>NO</th>
@@ -31,7 +39,7 @@
                 <td><?= student_id($std -> id)?></td>
                 <td><?= $std -> email ?></td>
                 <td><?= $std -> faculty ?></td>
-                <td>
+                <td class="option">
                     <a href="update.php?idUpdate=<?= $std -> id ?>">Edit</a>
                     <a href="delete.php?idDelete=<?= $std -> id ?>">Delete</a>
                 </td>

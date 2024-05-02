@@ -5,10 +5,10 @@
     $dbname = "university"; // use your own DB 
     $conn = new mysqli($host, $username, $pass, $dbname);
 
-    function query(){
+    function query($query){
         global $conn;
 
-        $stm = $conn->prepare("SELECT * FROM student");
+        $stm = $conn->prepare($query);
         if (!$stm){
             die("Failed to prepare statement : " .$conn->error());
         }
@@ -120,6 +120,17 @@
         } else{
             return -1;
         }
+
+    }
+
+    //search
+
+    function search($keyword){
+        global $conn;
+        
+        $query = ("SELECT * FROM student WHERE name LIKE '%$keyword%' OR email LIKE '%$keyword%' OR faculty LIKE '%$keyword%'");
+        
+        return query($query);
 
     }
 
