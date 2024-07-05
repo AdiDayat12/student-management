@@ -21,11 +21,13 @@ if (isset($_POST['search'])) {
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    
     <h1>STUDENT TABLE</h1>
-    <!-- <form action="" method="post">
-        <input type="text" placeholder="enter data" name="email">
+    <form action="" method="get">
+        <input type="text" placeholder="search student ..." id="keyword">
         <button type="submit" name="search">Search</button>
-    </form> -->
+    </form>
+    <div id="container">
     <table border="1" cellpadding="10" cellspacing="0">
         <tr>
             <th>NO</th>
@@ -39,21 +41,22 @@ if (isset($_POST['search'])) {
         <?php foreach ($students as $std) : ?>
             <tr>
                 <td><?= $i ?></td>
-                <td><?= $std->name ?></td>
-                <td><?= student_id($std->id) ?></td>
-                <td><?= $std->email ?></td>
-                <td><?= $std->faculty ?></td>
+                <td><?= htmlspecialchars($std->name) ?></td>
+                <td><?= htmlspecialchars(student_id($std->id)) ?></td>
+                <td><?= htmlspecialchars($std->email) ?></td>
+                <td><?= htmlspecialchars($std->faculty) ?></td>
                 <td class="option">
-                    <a href="update.php?idUpdate=<?= $std->id ?>">Edit</a>
-                    <a href="delete.php?idDelete=<?= $std->id ?>">Delete</a>
+                    <a href="update.php?idUpdate=<?= htmlspecialchars($std->id) ?>">Edit</a>
+                    <a href="delete.php?idDelete=<?= htmlspecialchars($std->id) ?>">Delete</a>
                 </td>
                 <?php $i++ ?>
             </tr>
         <?php endforeach ?>
     </table>
-    
     <div class="add-button">
         <a href="insert.php">Add Student</a>
     </div>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>

@@ -128,4 +128,26 @@ function login($data) {
         return false;
     }
 }
+
+function searchAjax ($query, $params = []){
+    global $conn;
+
+    $pre_stm = $conn->prepare($query);
+    
+    $types = str_repeat('s', count($params)); // Asumsi semua parameter adalah string
+    $pre_stm->bind_param($types, ...$params);
+
+    $pre_stm->execute();
+
+    $result = $pre_stm->get_result();
+
+    $data = [];
+    while ($row = $result->fetch_object()){
+        $data [] = $row;
+    }
+
+    $pre_stm->close();
+    
+    return $data;
+}
 ?>
